@@ -4,7 +4,6 @@ import logo from '../../Images/logo.png'
 import { Link } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import Sidebar from '../Sidebar/Sidebar';
 import { Context } from '../../context/Context';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import WestIcon from '@mui/icons-material/West';
@@ -23,23 +22,24 @@ function Navbar() {
       </div>
       <div className='right'>
         <ul>
-          <li><Link to="/">Home</Link></li>
+          {/* <li><Link to="/">Home</Link></li>
           <li><Link to="/offers">Offers</Link></li>
-          <li><Link to="/outlet">Outlet</Link></li>
+          <li><Link to="/outlet">Outlet</Link></li> */}
           {/* <li>Meals</li>
           <li>Favorite</li>
           <li>Orders</li>
           <li>Cart</li> */}
         </ul>
       </div>
-      <div style={{color:'white',gap:'20px',display:'flex'}}>
+      {/* <div onClick={()=>navigate('/home')}>Go to Website</div> */}
+      {/* <div style={{color:'white',gap:'20px',display:'flex'}}>
           <Link to="/cart"><ShoppingCartIcon/></Link>
           <Link to="/profile"><PersonIcon/></Link>
-        </div>
-      <div className='menu' onClick={()=>setSidebarOpen(!sidebarOpen)}>
+        </div> */}
+      {/* <div className='menu' onClick={()=>setSidebarOpen(!sidebarOpen)}>
         {location.pathname === "/" ? <MenuIcon sx={{color:'white'}}/> : <Link to="/"><WestIcon sx={{color:'white'}}/></Link> }
-      </div>
-      {open && <Sidebar/>}
+      </div> */}
+      {/* {open && <Sidebar/>} */}
     </div>
   )
 }
