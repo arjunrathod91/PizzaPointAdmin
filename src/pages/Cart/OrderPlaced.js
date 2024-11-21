@@ -11,7 +11,6 @@ function OrderPlaced() {
         <div>
           <img src={done} alt="Verified Symbol" />
         </div>
-        <div>Order will be delivered in 5 min</div>
         <div className="order" style={{marginTop:'10px'}} onClick={()=>navigate('/')}>Order More</div>
       </div>
     </div>
