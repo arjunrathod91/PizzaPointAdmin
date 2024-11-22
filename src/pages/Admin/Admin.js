@@ -2,11 +2,20 @@ import React, { useContext, useEffect, useState } from "react";
 import "../Profile/profile.css";
 import OrdersPage from "./ordersPage";
 import Menu from "./menuPage";
-import { AddAPhoto, Height, LocalShipping, Person, ShoppingCart } from "@mui/icons-material";
+import {
+  AddAPhoto,
+  Height,
+  LocalShipping,
+  Person,
+  ShoppingCart,
+} from "@mui/icons-material";
 import { Context } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import { useMediaQuery } from "@mui/material";
+import Form from "./Form";
+import Analytics from "./Analytics";
 function Profile() {
   const [section, setSection] = useState("Orders");
   const { loggedIn, setLoggedIn, rightSec, setRIghtSec } = useContext(Context);
@@ -20,7 +29,11 @@ function Profile() {
       case "Orders":
         return <OrdersPage />;
       case "Menu":
-        return <Menu />;
+        return <Menu setSection={setSection} />;
+      case "Form":
+        return <Form setSection={setSection} renderSection={renderSection} />;
+      case "Analytics":
+        return <Analytics />;
     }
   };
 
@@ -45,12 +58,11 @@ function Profile() {
       <div
         className="left"
         style={{
-          backgroundColor:'white',
+          backgroundColor: "white",
           width: `${width}`,
           zIndex: `${rightSec ? "1" : "2"}`,
           position: `${isMobile ? position : "relative"}`,
           top: `${isMobile ? "50px" : "0px"}`,
-
         }}
       >
         <div className="">
@@ -76,8 +88,19 @@ function Profile() {
             setRIghtSec(true);
           }}
         >
-           <AddAPhoto />
-           <span>Add Menu</span>
+          <AddAPhoto />
+          <span>Add Menu</span>
+        </div>
+        <div
+          className="pro-sec"
+          onClick={() => {
+            setSection("Analytics");
+            responsiveCtr();
+            setRIghtSec(true);
+          }}
+        >
+          <LeaderboardIcon />
+          <span>Analytics</span>
         </div>
       </div>
       <div

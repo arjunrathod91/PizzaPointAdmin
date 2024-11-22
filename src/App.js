@@ -4,6 +4,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Admin from './pages/Admin/Admin'
 import { MyContextProvider } from './context/Context'
 import Adminlogin from './pages/Admin/adminlogin'
+// import Form from './pages/Admin/Form'
 function App() {
   return (
     <div>
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Admin/>}/>
         <Route path='/adminlogin' element={<Adminlogin/>}/>
+        {/* <Route path='/form' element={<Form/>}/> */}
       </Routes>
       </BrowserRouter>
       </MyContextProvider>

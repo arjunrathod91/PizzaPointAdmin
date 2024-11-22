@@ -134,9 +134,98 @@
 }
 
 
-/*Menu*/
-/* .menu{
+/*edit menu*/
+.editmenu{
+    height: 100vh;
+    width: 100%;
+    padding: 10px;
+    position: relative;
+}
+.addnew{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+}
+.addnew button{
+    outline: none;
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 5px;
+    font-weight: 500;
+    margin: 10px 0;
+}
+.item-box{
+    height: 100px;
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2px;
+}
+.box-img img{
+    height:80px;
+    width: 80px;
+    margin-left: 10px;
+}
+.box-detail{
+    display: flex;
+    flex-direction: column;
+}
+.box-btn{
+    display: flex;
+    margin-right: 10px;
+}
+.box-btn .edit{
+    padding: 10px;
+    background-color: white;
+}
+.box-btn .delete{
+    padding: 10px;
+    background-color: rgb(255, 113, 113);
+}
+
+/*Form*/
+.form{
     height: 100%;
     width: 100%;
-    background-color: gold;
-} */
+    background-color: rgb(255, 255, 255);
+    /* position: absolute;
+    top: 0;
+    border-radius: 5px;
+    box-shadow: 0.2px 0.9px 4px rgb(190, 190, 190); */
+    padding: 10px;
+    /* display: flex;
+    flex-direction: column; */
+}
+.all-elements{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+.form-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.form-input{
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 3px;
+}
+
+
+/*Analytics*/
+.analytics{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+.content-box{
+    display: flex;
+    gap: 10px;
+}
