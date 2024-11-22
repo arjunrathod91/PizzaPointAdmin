@@ -18,11 +18,13 @@ export const MyContextProvider = ({ children }) => {
     const [rightSec,setRIghtSec] = useState(false);
     const [newOrder,setNewOrder] = useState({});
     const [adminOrders,setAdminOrders] = useState([]);
+    const [adminEmail,setAdminEmail] = useState("ar885209@gmail.com");
+    const [adminPassword,setAdminPassword] = useState("ar12ju34");
     
 
   return (
     <Context.Provider
-      value={{sidebarOpen,setSidebarOpen,cart,setCart,total,setTotal,loggedIn,setLoggedIn,allorders,setAllOrders,profileDetails,setProfileDetails,rightSec,setRIghtSec,newOrder,setNewOrder,adminOrders,setAdminOrders,category,setCategory}}
+      value={{sidebarOpen,setSidebarOpen,cart,setCart,total,setTotal,loggedIn,setLoggedIn,allorders,setAllOrders,profileDetails,setProfileDetails,rightSec,setRIghtSec,newOrder,setNewOrder,adminOrders,setAdminOrders,category,setCategory,adminEmail,setAdminEmail,adminPassword,setAdminPassword}}
     >
       {children}
     </Context.Provider>

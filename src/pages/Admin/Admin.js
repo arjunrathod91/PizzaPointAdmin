@@ -35,11 +35,11 @@ function Profile() {
       setZiNdexRight("2");
     }
   };
-  // useEffect(() => {
-  //   if (!loggedIn) {
-  //     navigate("/login");
-  //   }
-  // });
+  useEffect(() => {
+    if (!loggedIn) {
+      navigate("/adminlogin");
+    }
+  });
   return (
     <div className="profile">
       <div
