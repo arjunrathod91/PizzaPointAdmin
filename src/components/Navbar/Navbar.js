@@ -4,6 +4,7 @@ import logo from '../../Images/logo.png'
 import { Link } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+// import Sidebar from '../Sidebar/Sidebar';
 import { Context } from '../../context/Context';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import WestIcon from '@mui/icons-material/West';
@@ -31,12 +32,11 @@ function Navbar() {
           <li>Cart</li> */}
         </ul>
       </div>
-      {/* <div onClick={()=>navigate('/home')}>Go to Website</div> */}
       {/* <div style={{color:'white',gap:'20px',display:'flex'}}>
           <Link to="/cart"><ShoppingCartIcon/></Link>
           <Link to="/profile"><PersonIcon/></Link>
-        </div> */}
-      {/* <div className='menu' onClick={()=>setSidebarOpen(!sidebarOpen)}>
+        </div>
+      <div className='menu' onClick={()=>setSidebarOpen(!sidebarOpen)}>
         {location.pathname === "/" ? <MenuIcon sx={{color:'white'}}/> : <Link to="/"><WestIcon sx={{color:'white'}}/></Link> }
       </div> */}
       {/* {open && <Sidebar/>} */}

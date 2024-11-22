@@ -22,30 +22,6 @@ function Adminlogin() {
     else{
         alert("invalid admin details")
     }
-    // const postData = async () => {
-    //   try {
-    //     const response = await axios.post(
-    //       "https://pizzapointserver-1.onrender.com/login",
-    //       {
-    //         email: inputEmail,
-    //         password: inputPassword,
-    //       }
-    //     );
-
-    //     if (response.data.success) {
-    //       navigate("/profile");
-    //     } else {
-    //       alert("Invalid email or password");
-    //     }
-
-    //     const userData = response.data;
-    //     console.log(userData);
-    //   } catch (err) {
-    //     console.error("Error fetching menu data:", err);
-    //   }
-    // };
-
-    // postData();
   };
   return (
     <div className="login">
