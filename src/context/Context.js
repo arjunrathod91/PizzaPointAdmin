@@ -9,6 +9,7 @@ export const MyContextProvider = ({ children }) => {
     const [total,setTotal] = useState(0);
     const [loggedIn,setLoggedIn] = useState(false);
     const [allorders,setAllOrders] = useState([]);
+    const [itemInfo,setItemInfo] = useState({})
     const [profileDetails,setProfileDetails] = useState({"username":"arjun",
       "email":"ar885209@gmail.com",
       "password":"ar12ju34",
@@ -24,7 +25,7 @@ export const MyContextProvider = ({ children }) => {
 
   return (
     <Context.Provider
-      value={{sidebarOpen,setSidebarOpen,cart,setCart,total,setTotal,loggedIn,setLoggedIn,allorders,setAllOrders,profileDetails,setProfileDetails,rightSec,setRIghtSec,newOrder,setNewOrder,adminOrders,setAdminOrders,category,setCategory,adminEmail,setAdminEmail,adminPassword,setAdminPassword}}
+      value={{sidebarOpen,setSidebarOpen,cart,setCart,total,setTotal,loggedIn,setLoggedIn,itemInfo,setItemInfo,allorders,setAllOrders,profileDetails,setProfileDetails,rightSec,setRIghtSec,newOrder,setNewOrder,adminOrders,setAdminOrders,category,setCategory,adminEmail,setAdminEmail,adminPassword,setAdminPassword}}
     >
       {children}
     </Context.Provider>
