@@ -36,11 +36,13 @@ function MenuPage({setSection}) {
         </div>
         </div>
         <div className="box-btn">
-          <div className="edit" onClick={''}>Edit</div>
+          <div className="edit" onClick={()=>setOpenForm(true)}>Edit</div>
           <div className="delete" onClick={''}>Delete</div>
         </div>
       </div>
-      {/* {openForm && <Form openForm={openForm} setOpenForm={setOpenForm}/>} */}
+      <div className={openForm ? "overlay" : ""}>
+      {openForm && <Form openForm={openForm} setOpenForm={setOpenForm}/>}
+      </div>
     </div>
   );
 }
