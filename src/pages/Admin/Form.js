@@ -26,6 +26,7 @@ function Form({ setOpenForm,formMode,setFormMode}) {
       type:type == "" ? itemInfo.type : type,
       img:img == "" ? itemInfo.img : img
     }
+    setOpenForm(false);
     if(formMode == "edit"){
       try {
         const response1 = await axios.put(
@@ -40,13 +41,14 @@ function Form({ setOpenForm,formMode,setFormMode}) {
       }
     }
     else{
+      alert('Item added successfully')
       console.log(itemUpdate);
       try {
         const response = await axios.post(
           "https://pizzapointserver-1.onrender.com/allItems",
           itemUpdate
         );
-        console.log("the data of user sent successfully:", response.data);
+        // console.log("the data of user sent successfully:", response.data);
       } catch (error) {
         console.log(error);
       }
