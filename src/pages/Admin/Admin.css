@@ -255,6 +255,12 @@ textarea{
     border: none;
     outline: none;
 }
+.save:hover{
+    background-color: rgb(2, 99, 2);
+}
+.cancel:hover{
+    background-color: rgb(131, 0, 0);
+}
 
 
 /*Analytics*/

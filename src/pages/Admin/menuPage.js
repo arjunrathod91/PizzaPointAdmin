@@ -21,11 +21,25 @@ function MenuPage({ setSection }) {
   const [openForm, setOpenForm] = useState(false);
   const navigate = useNavigate();
   const [allItems, setAllItems] = useState([]);
+  const [formMode,setFormMode] = useState('')
 
   const handleBtn = (item) => {
     setOpenForm(true);
     setItemInfo(item);
   };
+
+  const deleteBtn=(itemId)=>{
+    axios
+      .delete("https://pizzapointserver-1.onrender.com/allItems", {
+        data: { id:itemId }, // pass the order ID in the body
+      })
+      .then((response) => {
+        console.log("Order deleted:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error deleting order:", error);
+      });
+  }
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -44,19 +58,6 @@ function MenuPage({ setSection }) {
     fetchMenu();
   }, []);
 
-  const deleteBtn=(itemId)=>{
-    axios
-      .delete("https://pizzapointserver-1.onrender.com/allItems", {
-        data: { id:itemId }, // pass the order ID in the body
-      })
-      .then((response) => {
-        console.log("Order deleted:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error deleting order:", error);
-      });
-  }
-
   const allCategories = [...new Set(allItems.map((item) => item.category))];
   return (
     <div className="editmenu">
@@ -69,7 +70,7 @@ function MenuPage({ setSection }) {
       )}
       <div className="addnew">
         {" "}
-        <button onClick={() => setOpenForm(true)}>Add New</button>
+        <button onClick={() => {setOpenForm(true);setFormMode('add')}}>Add New</button>
       </div>
       <div>
       </div>
@@ -96,7 +97,7 @@ function MenuPage({ setSection }) {
                   </div>
                 </div>
                 <div className="box-btn">
-                  <div className="edit" onClick={() => handleBtn(item)}>
+                  <div className="edit" onClick={() => {handleBtn(item);setFormMode('edit')}}>
                     Edit
                   </div>
                   <div className="delete" onClick={() => deleteBtn(item._id)}>
@@ -131,7 +132,7 @@ function MenuPage({ setSection }) {
         </div>
       ))} */}
       <div className={openForm ? "overlay" : ""}>
-        {openForm && <Form openForm={openForm} setOpenForm={setOpenForm} />}
+        {openForm && <Form openForm={openForm} setOpenForm={setOpenForm} formMode={formMode} setFormMode={setFormMode} />}
       </div>
     </div>
   );

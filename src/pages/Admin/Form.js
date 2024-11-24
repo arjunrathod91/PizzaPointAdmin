@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../../context/Context";
 import axios from "axios";
 
-function Form({ setOpenForm}) {
+function Form({ setOpenForm,formMode,setFormMode}) {
   const { allorders, setAllOrders, rightSec, setRIghtSec,itemInfo,setItemInfo } =
     useContext(Context);
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ function Form({ setOpenForm}) {
   const [price,setPrice] = useState('');
   const [category,setCategory] = useState('');
   const [type,setType] = useState('');
+  const [img,setImg] = useState('');
 
   const handleBtn=async(itemId)=>{
     const itemUpdate = {
@@ -22,17 +23,35 @@ function Form({ setOpenForm}) {
       rating:rating == "" ? itemInfo.rating : rating,
       price:price == "" ? itemInfo.price : price,
       category:category == "" ? itemInfo.category : category,
-      type:type == "" ? itemInfo.type : type
+      type:type == "" ? itemInfo.type : type,
+      img:img == "" ? itemInfo.img : img
     }
-    try {
-      const response1 = await axios.put(
-        `http://localhost:8000/allItems/${itemId}`,
-        itemUpdate
-      );
-      console.log("Item updated successfully:", response1.data);
-      setOpenForm(false);
-    } catch (error) {
-      console.log(error);
+    if(formMode == "edit"){
+      try {
+        const response1 = await axios.put(
+          `https://pizzapointserver-1.onrender.com/allItems/${itemId}`,
+          itemUpdate
+        );
+        console.log("Item updated successfully:", response1.data);
+        alert('Item Updated successfully');
+        setOpenForm(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    else{
+      console.log(itemUpdate);
+      try {
+        const response = await axios.post(
+          "https://pizzapointserver-1.onrender.com/allItems",
+          itemUpdate
+        );
+        console.log("the data of user sent successfully:", response.data);
+      } catch (error) {
+        console.log(error);
+      }
+      // console.log(formMode);
+
     }
   }
 
@@ -47,6 +66,10 @@ function Form({ setOpenForm}) {
         <div className="form-item">
           <div>Ingridient</div>
           <input className="form-input"  placeholder={itemInfo.ingridient} onChange={(e)=>setIngridient(e.target.value)} />
+        </div>
+        <div className="form-item">
+          <div>Img</div>
+          <input className="form-input" onChange={(e)=>setImg(e.target.value)} /> <img style={{height:'40px',width:'40px'}} src={img ? img : itemInfo.img}/>
         </div>
         <div className="form-item">
           <div>Rating</div>
