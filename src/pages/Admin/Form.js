@@ -15,6 +15,7 @@ function Form({ setOpenForm,formMode,setFormMode}) {
   const [category,setCategory] = useState('');
   const [type,setType] = useState('');
   const [img,setImg] = useState('');
+  const [display,setDisplay] = useState('');
 
   const handleBtn=async(itemId)=>{
     const itemUpdate = {
@@ -24,7 +25,8 @@ function Form({ setOpenForm,formMode,setFormMode}) {
       price:price == "" ? itemInfo.price : price,
       category:category == "" ? itemInfo.category : category,
       type:type == "" ? itemInfo.type : type,
-      img:img == "" ? itemInfo.img : img
+      img:img == "" ? itemInfo.img : img,
+      display:display == "" ? itemInfo.display : display,
     }
     setOpenForm(false);
     if(formMode == "edit"){
@@ -84,6 +86,10 @@ function Form({ setOpenForm,formMode,setFormMode}) {
         <div className="form-item">
           <div>category</div>
           <input className="form-input" placeholder={itemInfo.category} onChange={(e)=>setCategory(e.target.value)}  />
+        </div>
+        <div className="form-item">
+          <div>Display</div>
+          <input className="form-input" placeholder={itemInfo.display} onChange={(e)=>setDisplay(e.target.value)}  />
         </div>
         <div className="form-item">
           <div>Type</div>

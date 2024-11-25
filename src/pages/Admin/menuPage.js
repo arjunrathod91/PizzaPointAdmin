@@ -26,6 +26,7 @@ function MenuPage({ setSection }) {
   const handleBtn = (item) => {
     setOpenForm(true);
     setItemInfo(item);
+    console.log(formMode)
   };
 
   const deleteBtn=(itemId)=>{
@@ -92,7 +93,7 @@ function MenuPage({ setSection }) {
                   </div>
                   <div className="box-detail">
                     <div>{item.name}</div>
-                    <div>{item.ingridient.substring(0, 0)}</div>
+                    {/* <div>{item.ingridient.substring(0, 0)}</div> */}
                     <div>{item.price}</div>
                   </div>
                 </div>

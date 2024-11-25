@@ -5,7 +5,7 @@ import { Context } from "../../context/Context";
 import "./Admin.css";
 import axios from "axios";
 
-function OrdersPage() {
+function OrdersPage({locator}) {
   const isMobile = useMediaQuery("(max-width:600px)");
   const { allorders, setAllOrders, rightSec, setRIghtSec } =
     useContext(Context);
@@ -221,7 +221,7 @@ total}
                   ></div>
                   <div className="order-item">
                     <div>
-                      Total Bill <span style={{ color: "red" }}>Paid</span>
+                      Total Bill <span style={{ color: "green",marginLeft:'5px'}}>{item.paymentType}</span>
                     </div>
                     <div>{item.total}</div>
                   </div>

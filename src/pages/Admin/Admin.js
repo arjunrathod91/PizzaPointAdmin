@@ -21,6 +21,7 @@ function Profile() {
   const { loggedIn, setLoggedIn, rightSec, setRIghtSec } = useContext(Context);
   const isMobile = useMediaQuery("(max-width:600px)");
   const [zIndexLeft, setZiNdexLeft] = useState("1");
+  const [locator,setLocator] = useState('rgb(255, 202, 202)')
   const [zIndexRight, setZiNdexRight] = useState("2");
   const [width, setWidth] = useState("100%");
   const [position, setPosition] = useState("absolute");
@@ -29,11 +30,11 @@ function Profile() {
       case "Orders":
         return <OrdersPage />;
       case "Menu":
-        return <Menu setSection={setSection} />;
-      case "Form":
-        return <Form setSection={setSection} renderSection={renderSection} />;
+        return <Menu setSection={setSection} locator={locator} />;
+      // case "Form":
+      //   return <Form setSection={setSection} renderSection={renderSection} />;
       case "Analytics":
-        return <Analytics />;
+        return <Analytics locator={locator} />;
     }
   };
 
@@ -71,6 +72,7 @@ function Profile() {
         </div>
         <div
           className="pro-sec"
+          style={{backgroundColor:`${section == "Orders" ? locator : ''}`}}
           onClick={() => {
             setSection("Orders");
             responsiveCtr();
@@ -82,6 +84,7 @@ function Profile() {
         </div>
         <div
           className="pro-sec"
+          style={{backgroundColor:`${section == "Menu" ? locator : ''}`}}
           onClick={() => {
             setSection("Menu");
             responsiveCtr();
@@ -93,6 +96,7 @@ function Profile() {
         </div>
         <div
           className="pro-sec"
+          style={{backgroundColor:`${section == "Analytics" ? locator : ''}`}}
           onClick={() => {
             setSection("Analytics");
             responsiveCtr();
