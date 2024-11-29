@@ -4,6 +4,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Context } from "../../context/Context";
 import "./Admin.css";
 import axios from "axios";
+import phonecall from '../../Images/phonecall.mp3'
 
 function OrdersPage({locator}) {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -18,6 +19,11 @@ function OrdersPage({locator}) {
   const [acceptedOrders, setAcceptedOrders] = useState([]);
   const [newOrders, setNewOrders] = useState({});
   const [loading, setLoading] = useState(true);
+
+  const playsound=()=>{
+    const audio = new Audio(phonecall); // Path to your sound file
+    audio.play(); // Play the sound
+  }
 
   const newOrder = () => {
     const fetch = async () => {
@@ -112,8 +118,7 @@ function OrdersPage({locator}) {
           <h1>Orders</h1>
           <div className="details-sec">
             <div style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}>
-              Orderd by {newOrders.
-total}
+              Orderd by {newOrders.total}
             </div>
             <div className="user-order">
               {newOrders.order.map((item, index) => (
@@ -157,7 +162,7 @@ total}
                 <div>{newOrders.total}</div>
               </div>
               <div className="btn-sec">
-                <button className="accept" onClick={accept}>
+                <button className="accept" onClick={()=>{playsound()}}>
                   Accept
                 </button>
                 <button className="cancel" onClick={cancel}>
@@ -178,9 +183,10 @@ total}
           ? allorders.map((item, index) => (
               <div className="acc-ord-box" key={index}>
                 <div
-                  style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}
+                style={{display:'flex',justifyContent:'space-between'}}
                 >
-                  Orderd by {item.username}
+                 <span  style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}> Orderd by {item.username}</span>
+                 {/* <span>{item.date.date}</span> */}
                 </div>
                 <div className="user-order">
                   {allorders
