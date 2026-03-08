@@ -29,7 +29,7 @@ function OrdersPage({locator}) {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          "https://pizzapointserver-1.onrender.com/newOrder"
+          "https://pizzapointserver.onrender.com/newOrder"
         );
         setNewOrders(response.data[[response.data.length - 1]]);
       } catch (err) {
@@ -43,7 +43,7 @@ function OrdersPage({locator}) {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          "https://pizzapointserver-1.onrender.com/allOrders"
+          "https://pizzapointserver.onrender.com/allOrders"
         );
         setAllOrders(response.data);
       } catch (err) {
@@ -55,7 +55,7 @@ function OrdersPage({locator}) {
 
   const accept = async () => {
     axios
-      .post("https://pizzapointserver-1.onrender.com/allOrders", newOrders)
+      .post("https://pizzapointserver.onrender.com/allOrders", newOrders)
       .then((response) => {
         console.log("Response:", response.data); // Log the response data
       })
@@ -79,7 +79,7 @@ function OrdersPage({locator}) {
   const cancel = () => {
     console.log(newOrders._id)
     axios
-      .delete("https://pizzapointserver-1.onrender.com/newOrder", {
+      .delete("https://pizzapointserver.onrender.com/newOrder", {
         data: { id: newOrders._id }, // pass the order ID in the body
       })
       .then((response) => {
@@ -88,6 +88,7 @@ function OrdersPage({locator}) {
       .catch((error) => {
         console.error("Error deleting order:", error);
       });
+      
   };
   // const cancel = () => {};
 
@@ -162,7 +163,7 @@ function OrdersPage({locator}) {
                 <div>{newOrders.total}</div>
               </div>
               <div className="btn-sec">
-                <button className="accept" onClick={()=>{playsound()}}>
+                <button className="accept" onClick={()=>accept()}>
                   Accept
                 </button>
                 <button className="cancel" onClick={cancel}>

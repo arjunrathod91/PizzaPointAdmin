@@ -32,7 +32,7 @@ function Form({ setOpenForm,formMode,setFormMode}) {
     if(formMode == "edit"){
       try {
         const response1 = await axios.put(
-          `https://pizzapointserver-1.onrender.com/allItems/${itemId}`,
+          `https://pizzapointserver.onrender.com/allItems/${itemId}`,
           itemUpdate
         );
         console.log("Item updated successfully:", response1.data);
@@ -47,10 +47,11 @@ function Form({ setOpenForm,formMode,setFormMode}) {
       console.log(itemUpdate);
       try {
         const response = await axios.post(
-          "https://pizzapointserver-1.onrender.com/allItems",
+          // "https://pizzapointserver.onrender.com/allItems",
+          "http://localhost:8000/allItems",
           itemUpdate
         );
-        // console.log("the data of user sent successfully:", response.data);
+        console.log("the data of user sent successfully:", response.data);
       } catch (error) {
         console.log(error);
       }

@@ -31,7 +31,7 @@ function MenuPage({ setSection }) {
 
   const deleteBtn=(itemId)=>{
     axios
-      .delete("https://pizzapointserver-1.onrender.com/allItems", {
+      .delete("https://pizzapointserver.onrender.com/allItems", {
         data: { id:itemId }, // pass the order ID in the body
       })
       .then((response) => {
@@ -46,7 +46,7 @@ function MenuPage({ setSection }) {
     const fetchMenu = async () => {
       try {
         const response = await axios.get(
-          "https://pizzapointserver-1.onrender.com/allItems"
+          "https://pizzapointserver.onrender.com/allItems"
         );
         console.log(response.data);
         setAllItems(response.data);
@@ -76,7 +76,7 @@ function MenuPage({ setSection }) {
       <div>
       </div>
       {allCategories.map((category, index) => (
-        <div className="item-cont">
+        <div className="item-cont" key={index}>
           <div style={{marginTop:'10px'}} item={category} key={index}>
             <strong>{category} - <span>Total Item: {allItems.filter((item) => item.category === category).length}</span></strong>
           </div>
