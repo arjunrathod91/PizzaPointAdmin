@@ -30,7 +30,8 @@ function OrdersPage({locator}) {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/newOrder"
+          // "http://localhost:8000/newOrder"
+          "https://pizzapointserver.onrender.com/newOrder"
         );
         setNewOrders(response.data[response.data.length - 1]);
       } catch (err) {
@@ -44,7 +45,8 @@ function OrdersPage({locator}) {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/allOrders"
+          // "http://localhost:8000/allOrders"
+          "https://pizzapointserver.onrender.com/allOrders"
         );
         setAllOrders(response.data.reverse());
       } catch (err) {
@@ -57,14 +59,16 @@ function OrdersPage({locator}) {
   const accept = async () => {
   try {
     const response = await axios.post(
-      "http://localhost:8000/allOrders",
+      // "http://localhost:8000/allOrders",
+      "https://pizzapointserver.onrender.com/allOrders",
       newOrders
     );
 
     console.log("Order saved:", response.data);
 
     await axios.delete(
-      `http://localhost:8000/newOrder/${newOrders._id}`
+      // `http://localhost:8000/newOrder/${newOrders._id}`
+      `https://pizzapointserver.onrender.com/newOrder/${newOrders._id}`
     );
 
     console.log("Order removed from newOrders");
@@ -79,7 +83,8 @@ function OrdersPage({locator}) {
   console.log(newOrders._id);
 
   axios
-    .delete(`http://localhost:8000/newOrder/${newOrders._id}`)
+    // .delete(`http://localhost:8000/newOrder/${newOrders._id}`)
+    .delete(`https://pizzapointserver.onrender.com/newOrder/${newOrders._id}`)
     .then((response) => {
       console.log("Order deleted:", response.data);
       setNewOrders(null);
@@ -117,7 +122,8 @@ function OrdersPage({locator}) {
 // }, []); 
 
 useEffect(() => {
-  const socket = io("http://localhost:8000", {
+  // const socket = io("http://localhost:8000", {'
+  const socket = io("https://pizzapointserver.onrender.com", {
   transports: ["websocket"],
 });
 
