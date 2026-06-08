@@ -9,17 +9,17 @@ import axios from "axios";
 
 function MenuPage({ setSection }) {
   const {
-    allorders,
-    setAllOrders,
-    rightSec,
+    // allorders,
+    // setAllOrders,
+    // rightSec,
     setRIghtSec,
-    itemInfo,
+    // itemInfo,
     setItemInfo,
   } = useContext(Context);
   const isMobile = useMediaQuery("(max-width:600px)");
 
   const [openForm, setOpenForm] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [allItems, setAllItems] = useState([]);
   const [formMode,setFormMode] = useState('')
 

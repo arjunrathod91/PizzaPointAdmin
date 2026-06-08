@@ -50,10 +50,13 @@ function Profile() {
     }
   };
   useEffect(() => {
+    localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+  }, [loggedIn]);
+  useEffect(() => {
     if (!loggedIn) {
       navigate("/adminlogin");
     }
-  });
+  }, [loggedIn]);
   return (
     <div className="profile">
       <div

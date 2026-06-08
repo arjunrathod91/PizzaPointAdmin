@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext,useEffect, useState } from "react";
 import "../Profile/profile.css";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../context/Context";
@@ -15,14 +15,22 @@ function Adminlogin() {
   const [inputPassword, setInputPassword] = useState();
 
   const handleBtn = () => {
-    if(inputEmail == adminEmail && inputPassword == adminPassword){
+    if(inputEmail === adminEmail && inputPassword === adminPassword){
         alert('login successfull');
         navigate('/');
+        localStorage.setItem("admin", JSON.stringify({email:adminEmail,password:adminPassword}));
+        localStorage.setItem("loggedIn", JSON.stringify(true));
     }
     else{
         alert("invalid admin details")
     }
   };
+  useEffect(()=>{
+    const adminData = JSON.parse(localStorage.getItem("admin"));
+    if(adminData){
+      navigate('/');
+    }
+  },[]);
   return (
     <div className="login">
       <div className="login-box">

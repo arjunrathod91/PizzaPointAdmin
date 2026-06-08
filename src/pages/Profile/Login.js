@@ -55,7 +55,7 @@ function Login({}) {
             </label>
             <input type="password" placeholder="Password" value={inputPassword} onChange={(e)=>setInputPassword(e.target.value)} />
           </div>
-            <button className="login-btn" onClick={()=>{setLoggedIn(true);handleBtn()}}>Login</button>
+            <button className="login-btn" onClick={()=>{setLoggedIn(true);handleBtn()}}></button>
           <span onClick={() => navigate("/signup")} style={{cursor:'pointer'}}>Create new account ? </span>
         </div>
     </div>

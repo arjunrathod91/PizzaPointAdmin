@@ -1,5 +1,6 @@
 import { useMediaQuery } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
+import { io } from "socket.io-client";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Context } from "../../context/Context";
 import "./Admin.css";
@@ -8,7 +9,7 @@ import phonecall from '../../Images/phonecall.mp3'
 
 function OrdersPage({locator}) {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const { allorders, setAllOrders, rightSec, setRIghtSec } =
+  const { allorders, setAllOrders, setRIghtSec } =
     useContext(Context);
 
   // const obj = JSON.parse(localStorage.getItem("newOrder")) || [];
@@ -16,9 +17,9 @@ function OrdersPage({locator}) {
     setRIghtSec(false);
   };
 
-  const [acceptedOrders, setAcceptedOrders] = useState([]);
-  const [newOrders, setNewOrders] = useState({});
-  const [loading, setLoading] = useState(true);
+  // const [acceptedOrders, setAcceptedOrders] = useState([]);
+  const [newOrders, setNewOrders] = useState(null);
+  const [, setLoading] = useState(true);
 
   const playsound=()=>{
     const audio = new Audio(phonecall); // Path to your sound file
@@ -29,9 +30,9 @@ function OrdersPage({locator}) {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          "https://pizzapointserver.onrender.com/newOrder"
+          "http://localhost:8000/newOrder"
         );
-        setNewOrders(response.data[[response.data.length - 1]]);
+        setNewOrders(response.data[response.data.length - 1]);
       } catch (err) {
         console.error("Error fetching data:", err.message);
       }
@@ -43,9 +44,9 @@ function OrdersPage({locator}) {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          "https://pizzapointserver.onrender.com/allOrders"
+          "http://localhost:8000/allOrders"
         );
-        setAllOrders(response.data);
+        setAllOrders(response.data.reverse());
       } catch (err) {
         console.error("Error fetching data:", err.message);
       }
@@ -54,43 +55,39 @@ function OrdersPage({locator}) {
   };
 
   const accept = async () => {
-    axios
-      .post("https://pizzapointserver.onrender.com/allOrders", newOrders)
-      .then((response) => {
-        console.log("Response:", response.data); // Log the response data
-      })
-      .catch((error) => {
-        console.error("There was an error:", error); // Log the entire error
-        if (error.response) {
-          console.error("Response data:", error.response.data);
-          console.error("Response status:", error.response.status);
-          console.error("Response headers:", error.response.headers);
-        } else if (error.request) {
-          console.error(
-            "Request made but no response received:",
-            error.request
-          );
-        } else {
-          console.error("Error setting up the request:", error.message);
-        }
-      });
-    cancel();
-  };
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/allOrders",
+      newOrders
+    );
+
+    console.log("Order saved:", response.data);
+
+    await axios.delete(
+      `http://localhost:8000/newOrder/${newOrders._id}`
+    );
+
+    console.log("Order removed from newOrders");
+
+    setNewOrders(null);
+
+  } catch (error) {
+    console.error("Error in accept:", error);
+  }
+};
   const cancel = () => {
-    console.log(newOrders._id)
-    axios
-      .delete("https://pizzapointserver.onrender.com/newOrder", {
-        data: { id: newOrders._id }, // pass the order ID in the body
-      })
-      .then((response) => {
-        console.log("Order deleted:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error deleting order:", error);
-      });
-      
-  };
-  // const cancel = () => {};
+  console.log(newOrders._id);
+
+  axios
+    .delete(`http://localhost:8000/newOrder/${newOrders._id}`)
+    .then((response) => {
+      console.log("Order deleted:", response.data);
+      setNewOrders(null);
+    })
+    .catch((error) => {
+      console.error("Error deleting order:", error);
+    });
+};
 
   useEffect(() => {
     async function fetchData() {
@@ -103,7 +100,40 @@ function OrdersPage({locator}) {
     latestOrder();
   }, [newOrders, allorders]);
 
-  const option = () => {};
+//   useEffect(() => {
+//   async function fetchData() {
+//     setLoading(true);
+
+//     const res1 = await axios.get("/newOrder");
+//     const res2 = await axios.get("/allOrders");
+
+//     setNewOrders(res1.data);
+//     setAllOrders(res2.data);
+
+//     setLoading(false);
+//   }
+
+//   fetchData();
+// }, []); 
+
+useEffect(() => {
+  const socket = io("http://localhost:8000", {
+  transports: ["websocket"],
+});
+
+
+  socket.emit("join_admin");
+
+  socket.on("new_order", (order) => {
+    console.log("🔥 Real-time order:", order);
+    setNewOrders(order);
+    playsound();
+  });
+
+  return () => {
+    socket.disconnect(); // ✅ important
+  };
+}, []);
 
   return (
     <div className="orders-page">
@@ -119,7 +149,10 @@ function OrdersPage({locator}) {
           <h1>Orders</h1>
           <div className="details-sec">
             <div style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}>
-              Orderd by {newOrders.total}
+              Orderd by {newOrders.username} 
+            </div>
+            <div style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}>
+              {newOrders.date} 
             </div>
             <div className="user-order">
               {newOrders.order.map((item, index) => (
@@ -163,10 +196,10 @@ function OrdersPage({locator}) {
                 <div>{newOrders.total}</div>
               </div>
               <div className="btn-sec">
-                <button className="accept" onClick={()=>accept()}>
+                <button className="accept" style={{cursor:'pointer'}} onClick={()=>accept()}>
                   Accept
                 </button>
-                <button className="cancel" onClick={cancel}>
+                <button className="cancel" style={{cursor:'pointer'}} onClick={cancel}>
                   Cancel
                 </button>
               </div>
@@ -187,6 +220,7 @@ function OrdersPage({locator}) {
                 style={{display:'flex',justifyContent:'space-between'}}
                 >
                  <span  style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}> Orderd by {item.username}</span>
+                 <span  style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}> {item.date}</span>
                  {/* <span>{item.date.date}</span> */}
                 </div>
                 <div className="user-order">
@@ -228,10 +262,13 @@ function OrdersPage({locator}) {
                   ></div>
                   <div className="order-item">
                     <div>
-                      Total Bill <span style={{ color: "green",marginLeft:'5px'}}>{item.paymentType}</span>
+                      Total <span style={{ color: "green",marginLeft:'5px'}}>{item.paymentType}</span>
                     </div>
                     <div>{item.total}</div>
                   </div>
+                  {/* <div className="order-item">
+                    <button className="order-status-btn">Deliverey</button>
+                  </div> */}
                 </div>
               </div>
             ))
