@@ -19,7 +19,7 @@ function OrdersPage({locator}) {
 
   // const [acceptedOrders, setAcceptedOrders] = useState([]);
   const [newOrders, setNewOrders] = useState(null);
-  const [, setLoading] = useState(true);
+  // const [, setLoading] = useState(true);
 
   const playsound=()=>{
     const audio = new Audio(phonecall); // Path to your sound file
@@ -95,15 +95,15 @@ function OrdersPage({locator}) {
 };
 
   useEffect(() => {
-    async function fetchData() {
-      setLoading(true); // Start loading
-      await newOrder(); // Fetch your data
-      await latestOrder();
-      setLoading(false); // Stop loading
-    }
+    // async function fetchData() {
+    //   setLoading(true); // Start loading
+    //   await newOrder(); // Fetch your data
+    //   await latestOrder();
+    //   setLoading(false); // Stop loading
+    // }
     newOrder();
     latestOrder();
-  }, [newOrders, allorders]);
+  }, [latestOrder]);
 
 //   useEffect(() => {
 //   async function fetchData() {
@@ -168,10 +168,11 @@ useEffect(() => {
                   style={{ fontWeight: "500" }}
                 >
                   <div>
-                    {item.type == "veg" ? (
+                    {item.type === "veg" ? (
                       <>
                         <img
                           className="item-type-png"
+                          alt="veg"
                           src="https://clipground.com/images/veg-logo-png-6.png"
                         />
                       </>
@@ -179,6 +180,7 @@ useEffect(() => {
                       <>
                         <img
                           className="item-type-png"
+                          alt="non-veg"
                           src="https://www.pngkey.com/png/full/245-2459071_non-veg-icon-non-veg-symbol-png.png"
                         />
                       </>
@@ -238,10 +240,11 @@ useEffect(() => {
                           style={{ fontWeight: "500" }}
                         >
                           <div>
-                            {item.type == "veg" ? (
+                            {item.type === "veg" ? (
                               <>
                                 <img
                                   className="item-type-png"
+                                  alt="veg" 
                                   src="https://clipground.com/images/veg-logo-png-6.png"
                                 />
                               </>
@@ -249,6 +252,7 @@ useEffect(() => {
                               <>
                                 <img
                                   className="item-type-png"
+                                  alt="non-veg"
                                   src="https://www.pngkey.com/png/full/245-2459071_non-veg-icon-non-veg-symbol-png.png"
                                 />
                               </>

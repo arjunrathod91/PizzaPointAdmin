@@ -4,7 +4,7 @@ import { useMediaQuery } from "@mui/material";
 import { Context } from "../../context/Context";
 import "./Admin.css";
 import Form from "./Form";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function MenuPage({ setSection }) {
@@ -89,7 +89,7 @@ function MenuPage({ setSection }) {
                   style={{ display: "flex", gap: "40px" }}
                 >
                   <div className="box-img">
-                    <img src={item.img} />
+                    <img src={item.img} alt="" />
                   </div>
                   <div className="box-detail">
                     <div>{item.name}</div>

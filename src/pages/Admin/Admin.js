@@ -4,9 +4,9 @@ import OrdersPage from "./ordersPage";
 import Menu from "./menuPage";
 import {
   AddAPhoto,
-  Height,
-  LocalShipping,
-  Person,
+  // Height,
+  // LocalShipping,
+  // Person,
   ShoppingCart,
 } from "@mui/icons-material";
 import { Context } from "../../context/Context";
@@ -14,17 +14,17 @@ import { useNavigate } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import { useMediaQuery } from "@mui/material";
-import Form from "./Form";
+// import Form from "./Form";
 import Analytics from "./Analytics";
 function Profile() {
   const [section, setSection] = useState("Orders");
-  const { loggedIn, setLoggedIn, rightSec, setRIghtSec } = useContext(Context);
+  const { loggedIn, rightSec, setRIghtSec } = useContext(Context);
   const isMobile = useMediaQuery("(max-width:600px)");
-  const [zIndexLeft, setZiNdexLeft] = useState("1");
-  const [locator,setLocator] = useState('rgb(255, 202, 202)')
-  const [zIndexRight, setZiNdexRight] = useState("2");
-  const [width, setWidth] = useState("100%");
-  const [position, setPosition] = useState("absolute");
+  const [, setZiNdexLeft] = useState("1");
+  const [locator,] = useState('rgb(255, 202, 202)')
+  const [, setZiNdexRight] = useState("2");
+  const [width, ] = useState("100%");
+  const [position,] = useState("absolute");
   const renderSection = () => {
     switch (section) {
       case "Orders":
@@ -35,13 +35,15 @@ function Profile() {
       //   return <Form setSection={setSection} renderSection={renderSection} />;
       case "Analytics":
         return <Analytics locator={locator} />;
+      default:
+        return <OrdersPage />;  
     }
   };
 
   const navigate = useNavigate();
-  const login = () => {
-    setLoggedIn(true);
-  };
+  // const login = () => {
+  //   setLoggedIn(true);
+  // };
 
   const responsiveCtr = () => {
     if (isMobile) {
@@ -56,7 +58,7 @@ function Profile() {
     if (!loggedIn) {
       navigate("/adminlogin");
     }
-  }, [loggedIn]);
+  }, [loggedIn, navigate]);
   return (
     <div className="profile">
       <div
@@ -75,7 +77,7 @@ function Profile() {
         </div>
         <div
           className="pro-sec"
-          style={{backgroundColor:`${section == "Orders" ? locator : ''}`}}
+          style={{backgroundColor:`${section === "Orders" ? locator : ''}`}}
           onClick={() => {
             setSection("Orders");
             responsiveCtr();
@@ -87,7 +89,7 @@ function Profile() {
         </div>
         <div
           className="pro-sec"
-          style={{backgroundColor:`${section == "Menu" ? locator : ''}`}}
+          style={{backgroundColor:`${section === "Menu" ? locator : ''}`}}
           onClick={() => {
             setSection("Menu");
             responsiveCtr();
@@ -99,7 +101,7 @@ function Profile() {
         </div>
         <div
           className="pro-sec"
-          style={{backgroundColor:`${section == "Analytics" ? locator : ''}`}}
+          style={{backgroundColor:`${section === "Analytics" ? locator : ''}`}}
           onClick={() => {
             setSection("Analytics");
             responsiveCtr();

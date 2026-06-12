@@ -3,13 +3,13 @@ import "../Profile/profile.css";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../context/Context";
 import EmailIcon from "@mui/icons-material/Email";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+// import VisibilityIcon from "@mui/icons-material/Visibility";
 import LockIcon from "@mui/icons-material/Lock";
-import axios from "axios";
+// import axios from "axios";
 
 function Adminlogin() {
   const navigate = useNavigate();
-  const { setLoggedIn, profileDetails, setProfileDetails,adminEmail,setAdminEmail,adminPassword,setAdminPassword } =
+  const { setLoggedIn, adminEmail,adminPassword} =
     useContext(Context);
   const [inputEmail, setInputEmail] = useState();
   const [inputPassword, setInputPassword] = useState();
@@ -30,7 +30,7 @@ function Adminlogin() {
     if(adminData){
       navigate('/');
     }
-  },[]);
+  },[navigate]);
   return (
     <div className="login">
       <div className="login-box">

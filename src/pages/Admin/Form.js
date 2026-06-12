@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Context } from "../../context/Context";
 import axios from "axios";
 
 function Form({ setOpenForm,formMode,setFormMode}) {
-  const { allorders, setAllOrders, rightSec, setRIghtSec,itemInfo,setItemInfo } =
+  const { 
+    // allorders, setAllOrders, rightSec, setRIghtSec,
+    itemInfo,
+    // setItemInfo 
+  } =
     useContext(Context);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [name,setName] = useState('');
   const [ingridient,setIngridient] = useState('');
@@ -19,17 +23,17 @@ function Form({ setOpenForm,formMode,setFormMode}) {
 
   const handleBtn=async(itemId)=>{
     const itemUpdate = {
-      name:name == "" ? itemInfo.name : name,
-      ingridient:ingridient == "" ? itemInfo.ingridient : ingridient,
-      rating:rating == "" ? itemInfo.rating : rating,
-      price:price == "" ? itemInfo.price : price,
-      category:category == "" ? itemInfo.category : category,
-      type:type == "" ? itemInfo.type : type,
-      img:img == "" ? itemInfo.img : img,
-      display:display == "" ? itemInfo.display : display,
+      name:name === "" ? itemInfo.name : name,
+      ingridient:ingridient === "" ? itemInfo.ingridient : ingridient,
+      rating:rating === "" ? itemInfo.rating : rating,
+      price:price === "" ? itemInfo.price : price,
+      category:category === "" ? itemInfo.category : category,
+      type:type === "" ? itemInfo.type : type,
+      img:img === "" ? itemInfo.img : img,
+      display:display === "" ? itemInfo.display : display,
     }
     setOpenForm(false);
-    if(formMode == "edit"){
+    if(formMode === "edit"){
       try {
         const response1 = await axios.put(
           `https://pizzapointserver.onrender.com/allItems/${itemId}`,
@@ -74,7 +78,7 @@ function Form({ setOpenForm,formMode,setFormMode}) {
         </div>
         <div className="form-item">
           <div>Img</div>
-          <input className="form-input" onChange={(e)=>setImg(e.target.value)} /> <img style={{height:'40px',width:'40px'}} src={img ? img : itemInfo.img}/>
+          <input className="form-input" onChange={(e)=>setImg(e.target.value)} /> <img style={{height:'40px',width:'40px'}} alt="Item" src={img ? img : itemInfo.img}/>
         </div>
         <div className="form-item">
           <div>Rating</div>
