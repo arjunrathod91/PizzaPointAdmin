@@ -1,5 +1,5 @@
 import { useMediaQuery } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,useCallback } from "react";
 import { io } from "socket.io-client";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Context } from "../../context/Context";
@@ -41,20 +41,16 @@ function OrdersPage({locator}) {
     fetch();
   };
 
-  const latestOrder = () => {
-    const fetch = async () => {
-      try {
-        const response = await axios.get(
-          // "http://localhost:8000/allOrders"
-          "https://pizzapointserver.onrender.com/allOrders"
-        );
-        setAllOrders(response.data.reverse());
-      } catch (err) {
-        console.error("Error fetching data:", err.message);
-      }
-    };
-    fetch();
-  };
+const latestOrder = useCallback(async () => {
+  try {
+    const response = await axios.get(
+      "https://pizzapointserver.onrender.com/allOrders"
+    );
+    setAllOrders(response.data.reverse());
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+  }
+}, [setAllOrders]);
 
   const accept = async () => {
   try {

@@ -4,7 +4,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useMediaQuery } from "@mui/material";
 
 function Analytics() {
-  const { allorders, setAllOrders, rightSec, setRIghtSec } =
+  const { setRIghtSec } =
     useContext(Context);
     const isMobile = useMediaQuery("(max-width:600px)");
   return (
