@@ -40,8 +40,8 @@
     flex-direction: column;
     background-color: white;
     display: flex;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
     padding:20px;
     gap: 10px;
 }
@@ -107,8 +107,8 @@
     flex: 1;
     height: 100%;
     display: flex;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-direction: column;
     padding: 10px;
     padding-top: 30px;
@@ -119,7 +119,7 @@
     gap: 20px;
     display: flex;
     width: 90%;
-    justify-content: start;
+    justify-content: flex-start;
     padding: 15px;
     border-radius: 10px;
 }
@@ -131,13 +131,13 @@
     flex: 4;
     height: 100%;
     display: flex;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 @media only screen and (max-width:600px) {
-    .profile .left{
+    /* .profile .left{
         
-    }
+    } */
     
 }
