@@ -23,7 +23,7 @@ function Profile() {
   const [, setZiNdexLeft] = useState("1");
   const [locator,] = useState('rgb(255, 202, 202)')
   const [, setZiNdexRight] = useState("2");
-  const [width, ] = useState("100%");
+  const [width,] = useState("100%");
   const [position,] = useState("absolute");
   const renderSection = () => {
     switch (section) {
@@ -36,7 +36,7 @@ function Profile() {
       case "Analytics":
         return <Analytics locator={locator} />;
       default:
-        return <OrdersPage />;  
+        return <OrdersPage />;
     }
   };
 
@@ -71,13 +71,13 @@ function Profile() {
           top: `${isMobile ? "50px" : "0px"}`,
         }}
       >
-        <div className="">
+        {/* <div className="">
           <DashboardIcon />
           <span>Dashboard</span>
-        </div>
+        </div> */}
         <div
           className="pro-sec"
-          style={{backgroundColor:`${section === "Orders" ? locator : ''}`}}
+          style={{ backgroundColor: `${section === "Orders" ? locator : ''}` }}
           onClick={() => {
             setSection("Orders");
             responsiveCtr();
@@ -89,7 +89,7 @@ function Profile() {
         </div>
         <div
           className="pro-sec"
-          style={{backgroundColor:`${section === "Menu" ? locator : ''}`}}
+          style={{ backgroundColor: `${section === "Menu" ? locator : ''}` }}
           onClick={() => {
             setSection("Menu");
             responsiveCtr();
@@ -99,18 +99,18 @@ function Profile() {
           <AddAPhoto />
           <span>Add Menu</span>
         </div>
-        <div
+        {/* <div
           className="pro-sec"
-          style={{backgroundColor:`${section === "Analytics" ? locator : ''}`}}
-          onClick={() => {
-            setSection("Analytics");
-            responsiveCtr();
-            setRIghtSec(true);
-          }}
+          style={{ backgroundColor: `${section === "Analytics" ? locator : ''}` }}
+        onClick={() => {
+          setSection("Analytics");
+          responsiveCtr();
+          setRIghtSec(true);
+        }}
         >
-          <LeaderboardIcon />
-          <span>Analytics</span>
-        </div>
+          <LeaderboardIcon /> 
+          <span>Analytics</span> 
+        </div> */}
       </div>
       <div
         className="right"

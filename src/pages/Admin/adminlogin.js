@@ -27,7 +27,8 @@ function Adminlogin() {
   };
   useEffect(()=>{
     const adminData = JSON.parse(localStorage.getItem("admin"));
-    if(adminData){
+    const loggedIn = JSON.parse(localStorage.getItem("loggedIn"));
+    if(adminData || loggedIn){
       navigate('/');
     }
   },[navigate]);
