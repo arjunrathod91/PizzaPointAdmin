@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState, useCallback } from "react";
 import { io } from "socket.io-client";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Context } from "../../context/Context";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import "./Admin.css";
 import axios from "axios";
 import phonecall from '../../Images/phonecall.mp3'
@@ -20,6 +21,7 @@ function OrdersPage({ locator }) {
   // const [acceptedOrders, setAcceptedOrders] = useState([]);
   const [newOrders, setNewOrders] = useState(null);
   const [newOrderCount, setNewOrderCount] = useState(0);
+  const [selectedUser, setSelectedUser] = useState(null);
   // const [, setLoading] = useState(true);
 
   const playsound = () => {
@@ -97,6 +99,10 @@ function OrdersPage({ locator }) {
         console.error("Error deleting order:", error);
       });
   };
+
+  const showUserDetails = (userId) => {
+    setSelectedUser((prev) => (prev === userId ? null : userId));
+  }
 
   useEffect(() => {
     const fetchLatestOrders = async () => {
@@ -251,7 +257,7 @@ function OrdersPage({ locator }) {
                 style={{ display: 'flex', justifyContent: 'space-between' }}
               >
                 <span style={{ color: "blue", fontWeight: 500, fontSize: "12px" }}> Orderd by {item.username}</span>
-                <span style={{ color: "blue", fontWeight: 500, fontSize: "12px",display:'flex',gap:'5px' }}>
+                <span style={{ color: "blue", fontWeight: 500, fontSize: "12px", display: 'flex', gap: '5px' }}>
                   <span>{item.date}</span>
                   <span>{item.time}</span>
                 </span>
@@ -302,6 +308,27 @@ function OrdersPage({ locator }) {
                   </div>
                   <div>{item.total}</div>
                 </div>
+                <div style={{ display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffffff', cursor: 'pointer', borderRadius: '5px', padding: '5px 0', marginTop: '10px' }}>
+                  <div onClick={() => showUserDetails(index)}>User Details</div>
+                  <ArrowDropDownIcon />
+                </div>
+                {selectedUser === index && (
+                  <div className="user-order">
+                    {/* style={{ display: `${userDetailsShow === index ? 'flex' : 'none'}` }}  */}
+                  <div className="order-item">
+                    <span>Name</span>
+                    <span>{item.username}</span>
+                  </div>
+                  <div className="order-item">
+                    <span>Phone</span>
+                    <span>+91{item.contact}</span>
+                  </div>
+                  <div className="order-item">
+                    <span>Address</span>
+                    <span>{item.address}</span>
+                  </div>
+                </div>
+                )}
                 {/* <div className="order-item">
                     <button className="order-status-btn">Deliverey</button>
                   </div> */}
