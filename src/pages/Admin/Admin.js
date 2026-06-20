@@ -1,6 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
 import "../Profile/profile.css";
 import OrdersPage from "./ordersPage";
+
 import Menu from "./menuPage";
 import {
   AddAPhoto,
