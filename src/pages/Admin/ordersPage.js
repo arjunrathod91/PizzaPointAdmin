@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useMediaQuery } from "@mui/material";
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import { io } from "socket.io-client";
