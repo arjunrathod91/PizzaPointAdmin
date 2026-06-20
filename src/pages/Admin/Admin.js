@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
 import "../Profile/profile.css";
+import axios from "axios";
 import OrdersPage from "./ordersPage";
 
 import Menu from "./menuPage";
@@ -37,7 +38,7 @@ function Profile() {
       // case "Form":
       //   return <Form setSection={setSection} renderSection={renderSection} />;
       case "Analytics":
-        return <Analytics locator={locator} />;
+        return <Analytics locator={locator} allorders={allorders} />;
       default:
         return <OrdersPage />;
     }
@@ -54,6 +55,21 @@ function Profile() {
       setZiNdexRight("2");
     }
   };
+
+  const { allorders, setAllOrders } =
+    useContext(Context);
+
+  const fetchLatestOrders = async () => {
+    try {
+      const response = await axios.get(
+        "https://pizzapointserver.onrender.com/allOrders"
+      );
+      setAllOrders(response.data.reverse());
+    } catch (err) {
+      console.error("Error fetching data:", err.message);
+    }
+  };
+
   useEffect(() => {
     localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
   }, [loggedIn]);
@@ -102,18 +118,18 @@ function Profile() {
           <AddAPhoto />
           <span>Add Menu</span>
         </div>
-        {/* <div
+        <div
           className="pro-sec"
           style={{ backgroundColor: `${section === "Analytics" ? locator : ''}` }}
-        onClick={() => {
-          setSection("Analytics");
-          responsiveCtr();
-          setRIghtSec(true);
-        }}
+          onClick={() => {
+            setSection("Analytics");
+            responsiveCtr();
+            setRIghtSec(true);
+          }}
         >
-          <LeaderboardIcon /> 
-          <span>Analytics</span> 
-        </div> */}
+          <LeaderboardIcon />
+          <span>Analytics</span>
+        </div>
       </div>
       <div
         className="right"
