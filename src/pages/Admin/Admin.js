@@ -70,14 +70,15 @@ function Profile() {
     }
   };
 
+  // useEffect(() => {
+  //   localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+  // }, [loggedIn]);
+  const admin = JSON.parse(localStorage.getItem("admin"));
   useEffect(() => {
-    localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
-  }, [loggedIn]);
-  useEffect(() => {
-    if (!loggedIn) {
+    if (!admin) {
       navigate("/adminlogin");
     }
-  }, [loggedIn, navigate]);
+  }, [admin, navigate]);
   return (
     <div className="profile">
       <div
